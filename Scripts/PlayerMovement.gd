@@ -6,6 +6,8 @@ export var velocity = Vector2.ZERO
 export var speed = 350
 export var friction = 0.15
 export var acceleration = 0.1
+var is_moving: bool = false
+const VELOCITY_THRESHOLD = 0.1
 
 func move(subject: KinematicBody2D, delta: float):
 	var input = Vector2.ZERO
@@ -15,8 +17,11 @@ func move(subject: KinematicBody2D, delta: float):
 
 	if input.length() > 0:
 		velocity = lerp(velocity, input.normalized() * speed, acceleration)
+		is_moving = true
 	else:
 		velocity = lerp(velocity, Vector2.ZERO, friction)
+		is_moving = false
 
-	subject.move_and_slide(velocity)
+	if velocity.length() >= VELOCITY_THRESHOLD:
+		subject.move_and_slide(velocity)
 
