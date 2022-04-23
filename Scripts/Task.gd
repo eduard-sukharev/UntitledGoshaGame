@@ -24,3 +24,10 @@ func grip(body: Node2D):
 
 func release(body: Node2D):
 	grippers.erase(body.get_name())
+
+func take_damage(damage):
+	$Behaviors/Destructable.take_damage(damage)
+
+func _on_Destructable_is_destroyed():
+	grippers.clear()
+	queue_free()

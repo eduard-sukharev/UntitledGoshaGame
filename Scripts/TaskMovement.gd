@@ -3,7 +3,7 @@ extends AbstractMovement
 class_name TaskMovement
 
 export var velocity = Vector2.ZERO
-export var speed = 100
+export var speed = 70
 export var friction = 0.1
 export var acceleration = 0.3
 

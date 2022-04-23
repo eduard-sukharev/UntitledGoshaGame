@@ -36,6 +36,10 @@ func _input(event):
 		for shape in $GrabArea.get_children():
 			shape.disabled = true
 
+	if Input.is_action_pressed("ui_accept"):
+		for grip_key in $Behaviors/Grip.gripped:
+			$Behaviors/Damage.deal_damage($Behaviors/Grip.gripped[grip_key])
+
 
 func _on_GrabArea_body_entered(body):
 	$Behaviors/Grip.grip(self, body)
