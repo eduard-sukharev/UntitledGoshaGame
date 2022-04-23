@@ -29,3 +29,17 @@ func _input(event):
 	if dir == '':
 		dir = 'E'
 
+	# Enable grabing area only when grab button pressed
+	if Input.is_action_just_pressed("ui_select"):
+		$GrabArea.get_node(dir).disabled = false
+	if Input.is_action_just_released("ui_select"):
+		for shape in $GrabArea.get_children():
+			shape.disabled = true
+
+
+func _on_GrabArea_body_entered(body):
+	$Behaviors/Grip.grip(self, body)
+
+
+func _on_GrabArea_body_exited(body):
+	$Behaviors/Grip.release(self, body)

@@ -32,5 +32,11 @@ script = ExtResource( 3 )
 scale = Vector2( 2, 2 )
 shape = SubResource( 2 )
 
+[node name="GripRange" type="Area2D" parent="."]
+
+[node name="GripShape" type="CollisionShape2D" parent="GripRange"]
+scale = Vector2( 2, 2 )
+shape = SubResource( 1 )
+
 [connection signal="body_entered" from="LookoutRange" to="." method="_on_LookoutRange_body_entered"]
 [connection signal="body_exited" from="LookoutRange" to="." method="_on_LookoutRange_body_exited"]

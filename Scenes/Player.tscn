@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Player/Player.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Scripts/PlayerMovement.gd" type="Script" id=3]
-[ext_resource path="res://Scripts/GrabAreaShape.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Grip.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -21,45 +21,52 @@ animation = "grab"
 frame = 2
 
 [node name="GrabArea" type="Area2D" parent="."]
-script = ExtResource( 4 )
 
 [node name="E" type="CollisionShape2D" parent="GrabArea"]
 position = Vector2( 10, 0 )
+scale = Vector2( 1.5, 1.5 )
 shape = SubResource( 1 )
 disabled = true
 
 [node name="SE" type="CollisionShape2D" parent="GrabArea"]
 position = Vector2( 10, 10 )
+scale = Vector2( 1.5, 1.5 )
 shape = SubResource( 1 )
 disabled = true
 
 [node name="S" type="CollisionShape2D" parent="GrabArea"]
 position = Vector2( 0, 10 )
+scale = Vector2( 1.5, 1.5 )
 shape = SubResource( 1 )
 disabled = true
 
 [node name="SW" type="CollisionShape2D" parent="GrabArea"]
 position = Vector2( -10, 10 )
+scale = Vector2( 1.5, 1.5 )
 shape = SubResource( 1 )
 disabled = true
 
 [node name="W" type="CollisionShape2D" parent="GrabArea"]
 position = Vector2( -10, 0 )
+scale = Vector2( 1.5, 1.5 )
 shape = SubResource( 1 )
 disabled = true
 
 [node name="NW" type="CollisionShape2D" parent="GrabArea"]
 position = Vector2( -10, -10 )
+scale = Vector2( 1.5, 1.5 )
 shape = SubResource( 1 )
 disabled = true
 
 [node name="N" type="CollisionShape2D" parent="GrabArea"]
 position = Vector2( 0, -10 )
+scale = Vector2( 1.5, 1.5 )
 shape = SubResource( 1 )
 disabled = true
 
 [node name="NE" type="CollisionShape2D" parent="GrabArea"]
 position = Vector2( 10, -10 )
+scale = Vector2( 1.5, 1.5 )
 shape = SubResource( 1 )
 disabled = true
 
@@ -68,5 +75,11 @@ disabled = true
 [node name="Movable" type="Node" parent="Behaviors"]
 script = ExtResource( 3 )
 
+[node name="Grip" type="Node" parent="Behaviors"]
+script = ExtResource( 5 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
+
+[connection signal="body_entered" from="GrabArea" to="." method="_on_GrabArea_body_entered"]
+[connection signal="body_exited" from="GrabArea" to="." method="_on_GrabArea_body_exited"]
