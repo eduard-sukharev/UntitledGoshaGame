@@ -17,6 +17,6 @@ func move(subject: KinematicBody2D, delta: float):
 		velocity = lerp(velocity, input.normalized() * speed, acceleration)
 	else:
 		velocity = lerp(velocity, Vector2.ZERO, friction)
-	
+
 	subject.move_and_slide(velocity)
 

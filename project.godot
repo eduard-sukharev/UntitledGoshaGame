@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/AbstractMovement.gd"
 }, {
-"base": "Node2D",
+"base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Scripts/Player.gd"
@@ -28,18 +28,37 @@ _global_script_classes=[ {
 "class": "Steering",
 "language": "GDScript",
 "path": "res://Scripts/Steering.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Task",
+"language": "GDScript",
+"path": "res://Scripts/Task.gd"
+}, {
+"base": "AbstractMovement",
+"class": "TaskMovement",
+"language": "GDScript",
+"path": "res://Scripts/TaskMovement.gd"
 } ]
 _global_script_class_icons={
 "AbstractMovement": "",
 "Player": "",
 "PlayerMovement": "",
-"Steering": ""
+"Steering": "",
+"Task": "",
+"TaskMovement": ""
 }
 
 [application]
 
 config/name="UntitledGoshaGame"
+run/main_scene="res://Scenes/Map1.tscn"
 config/icon="res://icon.png"
+
+[importer_defaults]
+
+texture={
+"flags/filter": false
+}
 
 [input]
 
