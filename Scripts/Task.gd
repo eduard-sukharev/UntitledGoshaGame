@@ -4,6 +4,10 @@ class_name Task
 
 var grippers: Dictionary = {}
 
+func _ready():
+	$ProgressBar.max_value = $Behaviors/Destructable.hp
+	$ProgressBar.value = $Behaviors/Destructable.hp
+
 func _physics_process(delta):
 	if grippers.empty():
 		$Behaviors/Movable.move(self, delta)
@@ -31,3 +35,7 @@ func take_damage(damage):
 func _on_Destructable_is_destroyed():
 	grippers.clear()
 	queue_free()
+
+
+func _on_Destructable_health_set(health):
+	$ProgressBar.value = health

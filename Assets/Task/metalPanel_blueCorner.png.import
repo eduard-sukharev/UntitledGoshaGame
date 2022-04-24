@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blueJewel.png-6bebae6d21d14a08ad71348e2ded6b31.stex"
+path="res://.import/metalPanel_blueCorner.png-253ad1afad6944d028bb92bcf14940f5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Task/blueJewel.png"
-dest_files=[ "res://.import/blueJewel.png-6bebae6d21d14a08ad71348e2ded6b31.stex" ]
+source_file="res://Assets/Task/metalPanel_blueCorner.png"
+dest_files=[ "res://.import/metalPanel_blueCorner.png-253ad1afad6944d028bb92bcf14940f5.stex" ]
 
 [params]
 

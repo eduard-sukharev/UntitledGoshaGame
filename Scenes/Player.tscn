@@ -7,6 +7,7 @@
 [ext_resource path="res://Scripts/Grip.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 20, 20 )
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 12.0
@@ -23,51 +24,7 @@ frame = 2
 
 [node name="GrabArea" type="Area2D" parent="."]
 
-[node name="E" type="CollisionShape2D" parent="GrabArea"]
-position = Vector2( 10, 0 )
-scale = Vector2( 1.5, 1.5 )
-shape = SubResource( 1 )
-disabled = true
-
-[node name="SE" type="CollisionShape2D" parent="GrabArea"]
-position = Vector2( 10, 10 )
-scale = Vector2( 1.5, 1.5 )
-shape = SubResource( 1 )
-disabled = true
-
-[node name="S" type="CollisionShape2D" parent="GrabArea"]
-position = Vector2( 0, 10 )
-scale = Vector2( 1.5, 1.5 )
-shape = SubResource( 1 )
-disabled = true
-
-[node name="SW" type="CollisionShape2D" parent="GrabArea"]
-position = Vector2( -10, 10 )
-scale = Vector2( 1.5, 1.5 )
-shape = SubResource( 1 )
-disabled = true
-
-[node name="W" type="CollisionShape2D" parent="GrabArea"]
-position = Vector2( -10, 0 )
-scale = Vector2( 1.5, 1.5 )
-shape = SubResource( 1 )
-disabled = true
-
-[node name="NW" type="CollisionShape2D" parent="GrabArea"]
-position = Vector2( -10, -10 )
-scale = Vector2( 1.5, 1.5 )
-shape = SubResource( 1 )
-disabled = true
-
-[node name="N" type="CollisionShape2D" parent="GrabArea"]
-position = Vector2( 0, -10 )
-scale = Vector2( 1.5, 1.5 )
-shape = SubResource( 1 )
-disabled = true
-
-[node name="NE" type="CollisionShape2D" parent="GrabArea"]
-position = Vector2( 10, -10 )
-scale = Vector2( 1.5, 1.5 )
+[node name="GrabShape" type="CollisionShape2D" parent="GrabArea"]
 shape = SubResource( 1 )
 disabled = true
 

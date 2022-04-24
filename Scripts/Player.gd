@@ -31,10 +31,9 @@ func _input(event):
 
 	# Enable grabing area only when grab button pressed
 	if Input.is_action_just_pressed("ui_select"):
-		$GrabArea.get_node(dir).disabled = false
+		$GrabArea/GrabShape.disabled = false
 	if Input.is_action_just_released("ui_select"):
-		for shape in $GrabArea.get_children():
-			shape.disabled = true
+		$GrabArea/GrabShape.disabled = true
 
 	if Input.is_action_pressed("ui_accept"):
 		for grip_key in $Behaviors/Grip.gripped:
