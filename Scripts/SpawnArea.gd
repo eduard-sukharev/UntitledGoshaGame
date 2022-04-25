@@ -4,16 +4,23 @@ export var team_color = 'blue'
 export var spawn_delay = 0.5
 
 var team_backlog: Array = []
-var task = preload("res://Scenes/Task.tscn")
+var Task = preload("res://Scenes/Task.tscn")
 
 signal new_task(task)
 
 func _ready():
-	team_backlog.append(task.instance())
-	team_backlog.append(task.instance())
-	team_backlog.append(task.instance())
-	team_backlog.append(task.instance())
-	team_backlog.append(task.instance())
+
+	var destructable_config = {'destructable': {'hp': 5}}
+	var processable_config = {'processable': {'processing_time': 3}}
+	for i in range(5):
+		var task = Task.instance()
+		task.configure(destructable_config)
+		team_backlog.append(task)
+	for i in range(3):
+		var task = Task.instance()
+		task.configure(processable_config)
+		team_backlog.append(task)
+
 	$Timer.wait_time = spawn_delay
 
 
@@ -22,7 +29,7 @@ func _on_Timer_timeout():
 		$Timer.stop()
 		return
 
-	var task: Task = team_backlog.pop_back()
+	var task = team_backlog.pop_back()
 	randomize()
 	task.set_global_position(
 		get_global_position()

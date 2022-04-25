@@ -39,6 +39,13 @@ func _input(event):
 		for grip_key in $Behaviors/Grip.gripped:
 			$Behaviors/Damage.deal_damage($Behaviors/Grip.gripped[grip_key])
 
+	if Input.is_action_just_pressed("ui_cancel"):
+		for grip_key in $Behaviors/Grip.gripped:
+			$Behaviors/Process.start_processing($Behaviors/Grip.gripped[grip_key])
+	elif Input.is_action_just_released("ui_cancel"):
+		for grip_key in $Behaviors/Grip.gripped:
+			$Behaviors/Process.stop_processing($Behaviors/Grip.gripped[grip_key])
+
 
 func _on_GrabArea_body_entered(body):
 	$Behaviors/Grip.grip(self, body)
