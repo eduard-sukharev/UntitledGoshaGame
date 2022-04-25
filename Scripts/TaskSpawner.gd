@@ -4,7 +4,7 @@ export var spawn_delay = 0.5
 export var spawn_area: Vector2
 
 var team_backlog: Array = []
-var Task = preload("res://Scenes/Task.tscn")
+var Task = load("res://Scenes/Task.tscn")
 
 signal new_task(task)
 
@@ -18,6 +18,10 @@ func _ready():
 
 	$Timer.wait_time = spawn_delay
 	spawn_area = $CollisionShape2D.get_shape().extents
+
+func set_spawn_area_extents(extents: Vector2):
+	spawn_area = extents
+	$CollisionShape2D.get_shape().extents = extents
 
 
 func _on_Timer_timeout():
@@ -42,10 +46,10 @@ func _spawn_task(config):
 	emit_signal('new_task', task)
 
 
-func generate_technical_debt():
-	if tech_debt_types.size() == 0:
-		return
-
-	var tech_debt_config = tech_debt_types.keys()[randi() % tech_debt_types.size()]
-	var tech_debt: TechnicalDebt = load("res://Scenes/TechnicalDebt.tscn").instance()
-	tech_debt.configure(tech_debt_config)
+#func generate_technical_debt():
+#	if tech_debt_types.size() == 0:
+#		return
+#
+#	var tech_debt_config = tech_debt_types.keys()[randi() % tech_debt_types.size()]
+#	var tech_debt: TechnicalDebt = load("res://Scenes/TechnicalDebt.tscn").instance()
+#	tech_debt.configure(tech_debt_config)

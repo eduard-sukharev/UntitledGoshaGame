@@ -3,21 +3,27 @@ extends KinematicBody2D
 class_name Task
 
 var grippers: Dictionary = {}
+var tech_debt_types : Dictionary = {}
 
-func configure(config):
-	if 'processable' in config:
+signal generate_technical_debt()
+
+func configure(config: Dictionary):
+	var types = config.get('types', {})
+	if 'processable' in types:
 		var p_instance = load("res://Scenes/Processable.tscn").instance()
-		p_instance.processing_time = config['processable']['processing_time']
+		p_instance.processing_time = types['processable']['processing_time']
 		p_instance.set_name('Processable')
 		p_instance.connect("done", self, '_on_Processable_done')
 		$Behaviors.add_child(p_instance, true)
 
-	if 'destructable' in config:
+	if 'destructable' in types:
 		var d_instance = load("res://Scenes/Destructable.tscn").instance()
-		d_instance.hp = config['destructable']['hp']
+		d_instance.hp = types['destructable']['hp']
 		d_instance.set_name('Destructable')
 		d_instance.connect("is_destroyed", self, '_on_Destructable_is_destroyed')
 		$Behaviors.add_child(d_instance, true)
+
+	tech_debt_types = config.get('tech_debt', {})
 
 func _physics_process(delta):
 	if grippers.empty():
@@ -39,14 +45,21 @@ func release(body: Node2D):
 	grippers.erase(body.get_name())
 
 func take_damage(damage):
+	var damaged = false
 	for behavior in $Behaviors.get_children():
 		if behavior is AbstractDestructable:
 			behavior.take_damage(damage)
+	if not damaged:
+		emit_signal('generate_technical_debt')
 
 func start_processing():
+	var processed = false
 	for behavior in $Behaviors.get_children():
 		if behavior is AbstractProcessable:
 			behavior.start_processing()
+			processed = true
+	if not processed:
+		emit_signal('generate_technical_debt')
 
 func stop_processing():
 	for behavior in $Behaviors.get_children():

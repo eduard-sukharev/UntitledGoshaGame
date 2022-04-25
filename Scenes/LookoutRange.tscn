@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 100.0
+
+[node name="LookoutRange" type="Area2D"]
+
+[node name="LookoutShape" type="CollisionShape2D" parent="."]
+scale = Vector2( 2, 2 )
+shape = SubResource( 2 )

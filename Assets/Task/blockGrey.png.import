@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/metalPanel_blueCorner.png-253ad1afad6944d028bb92bcf14940f5.stex"
+path="res://.import/blockGrey.png-a66028a02a5d1507981bb0481273b03c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Task/metalPanel_blueCorner.png"
-dest_files=[ "res://.import/metalPanel_blueCorner.png-253ad1afad6944d028bb92bcf14940f5.stex" ]
+source_file="res://Assets/Task/blockGrey.png"
+dest_files=[ "res://.import/blockGrey.png-a66028a02a5d1507981bb0481273b03c.stex" ]
 
 [params]
 
