@@ -3,18 +3,21 @@ extends Node2D
 export var spawn_delay = 0.5
 export var spawn_area: Vector2
 
-var team_backlog: Array = []
+var backlog: Array = []
 var Task = load("res://Scenes/Task.tscn")
+var task_scale: = 1.0
 
 signal new_task(task)
 
 func _ready():
 	spawn_area = $CollisionShape2D.get_shape().extents
 
-func config(config: Dictionary):
+func configure(config: Dictionary):
 	for type in config.get('types', {}):
-		for i in range(3):
-			team_backlog.append(config)
+#		for i in range(3):
+			backlog.append(config)
+
+	task_scale = config.get('scale', 1.0)
 
 	if $Timer.is_stopped():
 		$Timer.start(spawn_delay)
@@ -25,14 +28,14 @@ func set_spawn_area_extents(extents: Vector2):
 
 
 func _on_Timer_timeout():
-	if team_backlog.size() <= 0:
+	if backlog.size() <= 0:
 		$Timer.stop()
 		return
 
-	generate_task(team_backlog.pop_back())
+	_spawn_task(backlog.pop_back())
 
 
-func generate_task(config):
+func _spawn_task(config):
 	var task = Task.instance()
 	task.configure(config)
 
@@ -44,4 +47,6 @@ func generate_task(config):
 			spawn_area.y * rand_range(-1, 1)
 		)
 	)
+	print(task_scale)
+	task.scale = Vector2(task_scale, task_scale)
 	emit_signal('new_task', task)
