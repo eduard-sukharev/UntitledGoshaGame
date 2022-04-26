@@ -30,3 +30,4 @@ script = ExtResource( 3 )
 
 [connection signal="body_entered" from="LookoutRange" to="." method="_on_LookoutRange_body_entered"]
 [connection signal="body_exited" from="LookoutRange" to="." method="_on_LookoutRange_body_exited"]
+[connection signal="new_task" from="TaskSpawner" to="." method="_on_TaskSpawner_new_task"]

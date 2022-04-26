@@ -58,11 +58,6 @@ _global_script_classes=[ {
 "class": "TaskMovement",
 "language": "GDScript",
 "path": "res://Scripts/TaskMovement.gd"
-}, {
-"base": "Task",
-"class": "TechnicalDebt",
-"language": "GDScript",
-"path": "res://Scripts/TechnicalDebt.gd"
 } ]
 _global_script_class_icons={
 "AbstractDestructable": "",
@@ -74,8 +69,7 @@ _global_script_class_icons={
 "Processable": "",
 "Steering": "",
 "Task": "",
-"TaskMovement": "",
-"TechnicalDebt": ""
+"TaskMovement": ""
 }
 
 [application]

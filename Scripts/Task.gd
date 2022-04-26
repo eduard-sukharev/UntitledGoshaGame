@@ -23,7 +23,11 @@ func configure(config: Dictionary):
 		d_instance.connect("is_destroyed", self, '_on_Destructable_is_destroyed')
 		$Behaviors.add_child(d_instance, true)
 
-	tech_debt_types = config.get('tech_debt', {})
+	tech_debt_types = {
+		'types': {
+			'destructable': {'hp': 3},
+		}
+	}
 
 func _physics_process(delta):
 	if grippers.empty():
@@ -50,7 +54,8 @@ func take_damage(damage):
 		if behavior is AbstractDestructable:
 			behavior.take_damage(damage)
 	if not damaged:
-		emit_signal('generate_technical_debt')
+		print('generate tech debt')
+		_generate_tech_debt()
 
 func start_processing():
 	var processed = false
@@ -59,12 +64,19 @@ func start_processing():
 			behavior.start_processing()
 			processed = true
 	if not processed:
-		emit_signal('generate_technical_debt')
+		print('generate tech debt')
+		_generate_tech_debt()
 
 func stop_processing():
 	for behavior in $Behaviors.get_children():
 		if behavior is AbstractProcessable:
 			behavior.stop_processing()
+
+func _generate_tech_debt():
+	if tech_debt_types.size() > 0:
+		var tech_debt_type = tech_debt_types.get('types', {}).keys()[randi() % tech_debt_types.get('types', {}).size()]
+		if tech_debt_type:
+			$TaskSpawner.generate_task(tech_debt_types['types'][tech_debt_type])
 
 func _on_Destructable_is_destroyed():
 	grippers.clear()
@@ -73,3 +85,7 @@ func _on_Destructable_is_destroyed():
 func _on_Processable_done():
 	grippers.clear()
 	queue_free()
+
+
+func _on_TaskSpawner_new_task(task):
+	get_parent().add_child(task)

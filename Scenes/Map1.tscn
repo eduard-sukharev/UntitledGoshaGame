@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Environment/scribble_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/TaskSpawner.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/MapTasks.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Map1.gd" type="Script" id=5]
 
 [node name="Map1" type="Node2D"]
+script = ExtResource( 5 )
 
 [node name="Background" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -22,7 +24,7 @@ tile_data = PoolIntArray( -131053, 1610612756, 0, -131052, 1610612756, 0, -13105
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
 
-[node name="Tasks" type="Node" parent="."]
+[node name="TasksHolder" type="Node" parent="."]
 script = ExtResource( 4 )
 
 [node name="TaskSpawners" type="Node" parent="."]
@@ -36,6 +38,6 @@ position = Vector2( 1161, 74 )
 [node name="SpawnArea3" parent="TaskSpawners" instance=ExtResource( 2 )]
 position = Vector2( 911, 721 )
 
-[connection signal="new_task" from="TaskSpawners/SpawnArea" to="Tasks" method="_on_SpawnArea_new_task"]
-[connection signal="new_task" from="TaskSpawners/SpawnArea2" to="Tasks" method="_on_SpawnArea_new_task"]
-[connection signal="new_task" from="TaskSpawners/SpawnArea3" to="Tasks" method="_on_SpawnArea_new_task"]
+[connection signal="new_task" from="TaskSpawners/SpawnArea" to="TasksHolder" method="_on_SpawnArea_new_task"]
+[connection signal="new_task" from="TaskSpawners/SpawnArea2" to="TasksHolder" method="_on_SpawnArea_new_task"]
+[connection signal="new_task" from="TaskSpawners/SpawnArea3" to="Player" method="_on_SpawnArea_new_task"]
