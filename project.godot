@@ -15,11 +15,6 @@ _global_script_classes=[ {
 "path": "res://Scripts/AbstractDestructable.gd"
 }, {
 "base": "Node",
-"class": "AbstractMovement",
-"language": "GDScript",
-"path": "res://Scripts/AbstractMovement.gd"
-}, {
-"base": "Node",
 "class": "AbstractProcessable",
 "language": "GDScript",
 "path": "res://Scripts/AbstractProcessable.gd"
@@ -34,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Player.gd"
 }, {
-"base": "AbstractMovement",
+"base": "Node",
 "class": "PlayerMovement",
 "language": "GDScript",
 "path": "res://Scripts/PlayerMovement.gd"
@@ -49,14 +44,13 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Task.gd"
 }, {
-"base": "AbstractMovement",
+"base": "Node",
 "class": "TaskMovement",
 "language": "GDScript",
 "path": "res://Scripts/TaskMovement.gd"
 } ]
 _global_script_class_icons={
 "AbstractDestructable": "",
-"AbstractMovement": "",
 "AbstractProcessable": "",
 "Destructable": "",
 "Player": "",

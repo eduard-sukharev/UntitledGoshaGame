@@ -1,4 +1,4 @@
-extends AbstractMovement
+extends Node
 
 class_name TaskMovement
 
