@@ -71,10 +71,7 @@ func stop_processing():
 
 func _generate_tech_debt():
 	if tech_debt_types.size() > 0:
-#		var tech_debt_type = tech_debt_types.get('types', {}).keys()[randi() % tech_debt_types.get('types', {}).size()]
-#		if tech_debt_type:
-#			$TaskSpawner.generate_task(tech_debt_types['types'][tech_debt_type])
-			$TaskSpawner.configure(tech_debt_types)
+		$TaskSpawner.configure(tech_debt_types)
 
 func _on_Destructable_is_destroyed():
 	grippers.clear()

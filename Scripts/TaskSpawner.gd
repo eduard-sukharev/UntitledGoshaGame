@@ -14,7 +14,7 @@ func _ready():
 
 func configure(config: Dictionary):
 	for type in config.get('types', {}):
-#		for i in range(3):
+		for i in range(3):
 			backlog.append(config)
 
 	task_scale = config.get('scale', 1.0)
