@@ -14,8 +14,7 @@ func _ready():
 
 func configure(config: Dictionary):
 	for type in config.get('types', {}):
-		for i in range(3):
-			backlog.append(config)
+		backlog.append(config)
 
 	task_scale = config.get('scale', 1.0)
 
@@ -47,6 +46,5 @@ func _spawn_task(config):
 			spawn_area.y * rand_range(-1, 1)
 		)
 	)
-	print(task_scale)
 	task.scale = Vector2(task_scale, task_scale)
 	emit_signal('new_task', task)

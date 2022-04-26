@@ -11,9 +11,9 @@ const VELOCITY_THRESHOLD = 0.1
 
 func move(subject: KinematicBody2D, delta: float):
 	var input = Vector2.ZERO
-	if not Input.is_action_pressed("ui_select"):
-		input.x =  int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
-		input.y =  int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
+	if not subject.is_action_pressed(subject.L1):
+		input.x =  int(subject.is_action_pressed(subject.RIGHT)) - int(subject.is_action_pressed(subject.LEFT))
+		input.y =  int(subject.is_action_pressed(subject.DOWN)) - int(subject.is_action_pressed(subject.UP))
 
 	if input.length() > 0:
 		velocity = lerp(velocity, input.normalized() * speed, acceleration)

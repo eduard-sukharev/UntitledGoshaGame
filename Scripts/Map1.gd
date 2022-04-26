@@ -37,5 +37,6 @@ func _ready():
 	}
 
 	for spawn_area in $TaskSpawners.get_children():
-		spawn_area.configure(destructable_task)
-		spawn_area.configure(processable_task)
+		for i in range(3):
+			spawn_area.configure(destructable_task)
+			spawn_area.configure(processable_task)
