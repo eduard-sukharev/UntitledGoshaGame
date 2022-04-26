@@ -8,8 +8,8 @@ const TIME_INCREMENT = 0.1
 
 
 func _ready():
-	$ProcessingProgressBar.max_value = processing_time
-	$ProcessingProgressBar.value = processing_time
+	$ProcessingProgressBar.max_value = processing_time * 10
+	$ProcessingProgressBar.value = processing_time * 10
 
 func start_processing():
 	print('Tick!')
@@ -24,4 +24,4 @@ func _on_Timer_timeout():
 	if eta <= 0:
 		emit_signal("done")
 
-	$ProcessingProgressBar.value = eta
+	$ProcessingProgressBar.value = eta * 10
