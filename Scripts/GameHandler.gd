@@ -4,6 +4,7 @@ onready var map = preload("res://Scenes/Map1.tscn").instance()
 
 onready var camera_scene = preload("res://Scenes/Camera2D.tscn")
 onready var player_scene = preload("res://Scenes/Player.tscn")
+onready var player_hud_scene = preload("res://Scenes/HUD.tscn")
 var players = []
 
 var game_started : bool = false
@@ -32,6 +33,9 @@ func add_player():
 	else:
 		render.viewport.world_2d = $Splitscreen.get_player(0).viewport.world_2d
 
+	var player_hud = player_hud_scene.instance()
+	render.add_child(player_hud)
+
 	map.add_child(player, true)
 	players.push_back(player)
 
@@ -48,6 +52,9 @@ func remove_player():
 
 
 func _on_Menu_game_started():
+	new_game()
+
+func new_game():
 	var splitscreen = load("res://organicpencil.splitscreen/splitscreen.tscn").instance()
 	add_player()
 	game_started = true
