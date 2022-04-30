@@ -48,7 +48,7 @@ func remove_player():
 
 
 func _on_Menu_game_started():
-	var splitscreen = load("res://Scenes/GameView.tscn").instance()
+	var splitscreen = load("res://organicpencil.splitscreen/splitscreen.tscn").instance()
 	add_player()
 	game_started = true
 
