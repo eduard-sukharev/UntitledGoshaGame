@@ -1,19 +1,17 @@
 extends Node
 
-onready var camera = preload("res://Scenes/Camera2D.tscn")
+onready var map = preload("res://Scenes/Map1.tscn").instance()
+
+onready var camera_scene = preload("res://Scenes/Camera2D.tscn")
 onready var player_scene = preload("res://Scenes/Player.tscn")
 var players = []
 
-var map
-
-func load_map(new_map):
-	map = new_map
-	add_player()
+var game_started : bool = false
 
 func _unhandled_input(event):
-	if Input.is_action_pressed("ui_page_up"):
+	if game_started and Input.is_action_pressed("ui_page_up"):
 		add_player()
-	if Input.is_action_pressed("ui_page_down"):
+	if game_started and Input.is_action_pressed("ui_page_down"):
 		remove_player()
 
 func add_player():
@@ -24,7 +22,7 @@ func add_player():
 	var render = $Splitscreen.add_player(id)
 	var player = player_scene.instance()
 	player.id = id
-	var cam = camera.instance()
+	var cam = camera_scene.instance()
 	cam.target = player
 	render.viewport.add_child(cam)
 
@@ -46,3 +44,14 @@ func remove_player():
 	var player = players.pop_back()
 	map.remove_child(player)
 	player.queue_free()
+
+
+
+func _on_Menu_game_started():
+	var splitscreen = load("res://Scenes/GameView.tscn").instance()
+	add_player()
+	game_started = true
+
+	add_child(splitscreen)
+
+	get_node("Menu").hide()
