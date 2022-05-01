@@ -5,7 +5,7 @@ onready var map = preload("res://Scenes/Map1.tscn").instance()
 onready var camera_scene = preload("res://Scenes/Camera2D.tscn")
 onready var player_scene = preload("res://Scenes/Player.tscn")
 onready var player_hud_scene = preload("res://Scenes/HUD.tscn")
-var players = []
+var players : Dictionary = {}
 
 var game_started : bool = false
 
@@ -16,10 +16,11 @@ func _unhandled_input(event):
 		remove_player()
 
 func add_player():
-	if players.size() >= 4:
+	print($Splitscreen.player_count)
+	if $Splitscreen.player_count >= 4:
 		return
 
-	var id = players.size()
+	var id = $Splitscreen.player_count
 	var render = $Splitscreen.add_player(id)
 	var player = player_scene.instance()
 	player.id = id
@@ -35,23 +36,29 @@ func add_player():
 
 	var player_hud: HUD = player_hud_scene.instance()
 	$RoundTimer.connect("counted_down", player_hud, "show_time")
+	self.connect("counted_down", player_hud, "show_time")
 	player_hud.show_time($RoundTimer._count)
 	render.add_child(player_hud)
 
 	map.add_child(player, true)
-	players.push_back(player)
+	players[id] = {
+		"node": player,
+		"hud": player_hud,
+		"score": 0,
+	}
 
 func remove_player():
-	if players.size() <= 1:
+	print($Splitscreen.player_count)
+	if $Splitscreen.player_count <= 1:
 		return
 
-	var id = players.size() - 1
+	var id = $Splitscreen.player_count - 1
 	$Splitscreen.remove_player(id)
-	var player = players.pop_back()
+
+	var player = players.get(id, {}).get('node')
 	map.remove_child(player)
 	player.queue_free()
-
-
+	players.erase(id)
 
 func _on_Menu_game_started():
 	new_game()
@@ -65,3 +72,9 @@ func new_game():
 	add_child(splitscreen)
 
 	get_node("Menu").hide()
+
+func update_player_score(player_id, added_scores):
+	var player_info = players.get(player_id)
+	player_info['score'] += added_scores
+	player_info['hud'].show_score(player_info['score'])
+

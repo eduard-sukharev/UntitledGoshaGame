@@ -3,9 +3,14 @@ extends KinematicBody2D
 class_name Task
 
 var grippers: Dictionary = {}
-var tech_debt_types : Dictionary = {}
+var tech_debt_config : Dictionary = {}
+var possible_tech_debt : int
+var cost : int
 
 signal generate_technical_debt()
+
+const DEFAULT_COST = 10
+const DEFAULT_TECH_DEBT_LIMIT = 0
 
 func configure(config: Dictionary):
 	var types = config.get('types', {})
@@ -23,7 +28,10 @@ func configure(config: Dictionary):
 		d_instance.connect("is_destroyed", self, '_on_Destructable_is_destroyed')
 		$Behaviors.add_child(d_instance, true)
 
-	tech_debt_types = config.get('tech_debt', {})
+	cost = config.get('cost', DEFAULT_COST)
+	possible_tech_debt = config.get('tech_debt_limit', DEFAULT_TECH_DEBT_LIMIT)
+
+	tech_debt_config = config.get('tech_debt', {})
 
 func _physics_process(delta):
 	if grippers.empty():
@@ -70,8 +78,11 @@ func stop_processing():
 			behavior.stop_processing()
 
 func _generate_tech_debt():
-	if tech_debt_types.size() > 0:
-		$TaskSpawner.configure(tech_debt_types)
+	print('Available to spawn tech debt: ', possible_tech_debt)
+	if tech_debt_config.size() > 0 and possible_tech_debt > 0:
+		$TaskSpawner.configure(tech_debt_config)
+		possible_tech_debt -= 1
+		cost -= tech_debt_config.get('cost', DEFAULT_COST)
 
 func _on_Destructable_is_destroyed():
 	grippers.clear()

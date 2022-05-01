@@ -10,8 +10,10 @@ func _ready():
 			'types': {
 				'destructable': {'hp': 3},
 			},
-			'scale': 0.7,
-		}
+			'scale': 0.7
+		},
+		'tech_debt_limit': 3,
+		'score': 30
 	}
 	var destructable_task = {
 		'types': {
@@ -21,8 +23,10 @@ func _ready():
 			'types': {
 				'destructable': {'hp': 3},
 			},
-			'scale': 0.7,
-		}
+			'scale': 0.7
+		},
+		'tech_debt_limit': 3,
+		'score': 50
 	}
 	var processable_task = {
 		'types': {
@@ -32,8 +36,10 @@ func _ready():
 			'types': {
 				'destructable': {'hp': 3},
 			},
-			'scale': 0.7,
-		}
+			'scale': 0.7
+		},
+		'tech_debt_limit': 2,
+		'score': 30
 	}
 
 	for spawn_area in $TaskSpawners.get_children():
