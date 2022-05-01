@@ -13,5 +13,7 @@ script = ExtResource( 3 )
 [node name="Splitscreen" parent="." instance=ExtResource( 4 )]
 
 [node name="RoundTimer" parent="." instance=ExtResource( 1 )]
+_count = 10
 
 [connection signal="game_started" from="Menu" to="." method="_on_Menu_game_started"]
+[connection signal="time_is_out" from="RoundTimer" to="." method="_on_RoundTimer_time_is_out"]

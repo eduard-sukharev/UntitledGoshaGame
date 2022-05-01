@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/HUD.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scripts/ResultScreen.gd" type="Script" id=2]
+[ext_resource path="res://Assets/HUD/file_95726072.png" type="Texture" id=3]
+
+[node name="ResultScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.439216 )
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = 30.0
+margin_right = -30.0
+margin_bottom = -30.0
+
+[node name="VBox" type="VBoxContainer" parent="Margin"]
+margin_right = 1860.0
+margin_bottom = 1020.0
+
+[node name="ScoreLabel" type="Label" parent="Margin/VBox"]
+margin_right = 1860.0
+margin_bottom = 71.0
+custom_fonts/font = ExtResource( 1 )
+text = "Your score:"
+align = 1
+
+[node name="PlayerScore" type="Label" parent="Margin/VBox"]
+margin_top = 75.0
+margin_right = 1860.0
+margin_bottom = 146.0
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="Margin/VBox"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 150.0
+margin_right = 1860.0
+margin_bottom = 250.0
+size_flags_vertical = 3
+
+[node name="SprintResultLabel" type="Label" parent="Margin/VBox"]
+margin_top = 254.0
+margin_right = 1860.0
+margin_bottom = 325.0
+custom_fonts/font = ExtResource( 1 )
+text = "Sprint result:"
+align = 1
+
+[node name="SprintResult" type="Label" parent="Margin/VBox"]
+margin_top = 329.0
+margin_right = 1860.0
+margin_bottom = 400.0
+custom_fonts/font = ExtResource( 1 )
+text = "0%"
+align = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Margin/VBox"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 404.0
+margin_right = 1860.0
+margin_bottom = 504.0
+size_flags_vertical = 3
+
+[node name="File95726072" type="TextureRect" parent="Margin/VBox"]
+margin_left = 674.0
+margin_top = 508.0
+margin_right = 1186.0
+margin_bottom = 1020.0
+size_flags_horizontal = 6
+texture = ExtResource( 3 )

@@ -5,6 +5,7 @@ onready var map = preload("res://Scenes/Map1.tscn").instance()
 onready var camera_scene = preload("res://Scenes/Camera2D.tscn")
 onready var player_scene = preload("res://Scenes/Player.tscn")
 onready var player_hud_scene = preload("res://Scenes/HUD.tscn")
+onready var result_screen_scene = load("res://Scenes/ResultScreen.tscn")
 var players : Dictionary = {}
 
 var game_started : bool = false
@@ -34,16 +35,23 @@ func add_player():
 	else:
 		render.viewport.world_2d = $Splitscreen.get_player(0).viewport.world_2d
 
+	# add player HUD
 	var player_hud: HUD = player_hud_scene.instance()
 	$RoundTimer.connect("counted_down", player_hud, "show_time")
 	player.connect("got_scores", self, "update_player_score")
 	player_hud.show_time($RoundTimer._count)
 	render.add_child(player_hud)
 
+	# add player result screen
+	var result_screen: ResultScreen = result_screen_scene.instance()
+	result_screen.hide()
+	render.add_child(result_screen)
+
 	map.add_child(player, true)
 	players[id] = {
 		"node": player,
 		"hud": player_hud,
+		"result_screen": result_screen,
 		"score": 0,
 	}
 
@@ -78,3 +86,12 @@ func update_player_score(player_id, added_scores):
 	player_info['score'] += added_scores
 	player_info['hud'].show_score(player_info['score'])
 
+func _on_RoundTimer_time_is_out():
+	game_started = false
+	var sprint_complete_rate = 0.9
+	for player_id in players:
+		players[player_id].get('hud').hide()
+
+		players[player_id].get('result_screen').show()
+		players[player_id].get('result_screen').set_player_score(players.get(player_id, {}).get('score'))
+		players[player_id].get('result_screen').set_sprint_result(sprint_complete_rate)
