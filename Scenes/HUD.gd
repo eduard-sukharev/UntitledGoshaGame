@@ -7,3 +7,6 @@ func show_time(total_seconds):
 	var seconds = total_seconds % 60
 
 	$MarginContainer/Panel/Time.text = '%d:%d' % [minutes, seconds]
+
+func show_score(new_score):
+	$MarginContainer/Panel/Score.text = '%d' % new_score

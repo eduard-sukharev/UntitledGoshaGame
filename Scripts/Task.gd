@@ -78,17 +78,24 @@ func stop_processing():
 			behavior.stop_processing()
 
 func _generate_tech_debt():
-	print('Available to spawn tech debt: ', possible_tech_debt)
 	if tech_debt_config.size() > 0 and possible_tech_debt > 0:
 		$TaskSpawner.configure(tech_debt_config)
 		possible_tech_debt -= 1
 		cost -= tech_debt_config.get('cost', DEFAULT_COST)
+		print('New task cost: ', cost)
+
+func _award_grippers():
+	var award = cost / grippers.size()
+	for gripper_name in grippers:
+		grippers[gripper_name].award(award)
 
 func _on_Destructable_is_destroyed():
+	_award_grippers()
 	grippers.clear()
 	queue_free()
 
 func _on_Processable_done():
+	_award_grippers()
 	grippers.clear()
 	queue_free()
 

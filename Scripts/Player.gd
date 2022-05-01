@@ -16,6 +16,8 @@ const B = 'player_B'
 const X = 'player_X'
 const Y = 'player_Y'
 
+signal got_scores(id, scores)
+
 func is_action_pressed(action):
 	return Input.is_action_pressed(str(action, '_', id))
 
@@ -24,6 +26,10 @@ func is_action_just_pressed(action):
 
 func is_action_just_released(action):
 	return Input.is_action_just_released(str(action, '_', id))
+
+func award(scores: int):
+	print('Awarded: ', scores)
+	emit_signal('got_scores', id, scores)
 
 func _process(delta):
 	if $Behaviors/Movable.is_moving:

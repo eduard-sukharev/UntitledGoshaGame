@@ -13,7 +13,7 @@ func _ready():
 			'scale': 0.7
 		},
 		'tech_debt_limit': 3,
-		'score': 30
+		'cost': 30
 	}
 	var destructable_task = {
 		'types': {
@@ -26,7 +26,7 @@ func _ready():
 			'scale': 0.7
 		},
 		'tech_debt_limit': 3,
-		'score': 50
+		'cost': 50
 	}
 	var processable_task = {
 		'types': {
@@ -39,7 +39,7 @@ func _ready():
 			'scale': 0.7
 		},
 		'tech_debt_limit': 2,
-		'score': 30
+		'cost': 30
 	}
 
 	for spawn_area in $TaskSpawners.get_children():

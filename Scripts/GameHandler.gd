@@ -22,7 +22,7 @@ func add_player():
 
 	var id = $Splitscreen.player_count
 	var render = $Splitscreen.add_player(id)
-	var player = player_scene.instance()
+	var player : Player = player_scene.instance()
 	player.id = id
 	var cam = camera_scene.instance()
 	cam.target = player
@@ -36,7 +36,7 @@ func add_player():
 
 	var player_hud: HUD = player_hud_scene.instance()
 	$RoundTimer.connect("counted_down", player_hud, "show_time")
-	self.connect("counted_down", player_hud, "show_time")
+	player.connect("got_scores", self, "update_player_score")
 	player_hud.show_time($RoundTimer._count)
 	render.add_child(player_hud)
 
