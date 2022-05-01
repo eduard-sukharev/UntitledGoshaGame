@@ -33,7 +33,9 @@ func add_player():
 	else:
 		render.viewport.world_2d = $Splitscreen.get_player(0).viewport.world_2d
 
-	var player_hud = player_hud_scene.instance()
+	var player_hud: HUD = player_hud_scene.instance()
+	$RoundTimer.connect("counted_down", player_hud, "show_time")
+	player_hud.show_time($RoundTimer._count)
 	render.add_child(player_hud)
 
 	map.add_child(player, true)
@@ -58,6 +60,7 @@ func new_game():
 	var splitscreen = load("res://organicpencil.splitscreen/splitscreen.tscn").instance()
 	add_player()
 	game_started = true
+	$RoundTimer.start()
 
 	add_child(splitscreen)
 
